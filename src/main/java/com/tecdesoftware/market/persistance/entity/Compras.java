@@ -15,7 +15,7 @@ public class Compras {
 
     private String nombre;
 
-    @Column(name ="id_categoria")
+    @Column(name = "id_categoria")
     private Integer idCategoria;
 
     @Column(name = "codigo_barras")
@@ -24,8 +24,11 @@ public class Compras {
     @Column(name = "precio_venta")
     private Double precioVenta;
 
-    @Column (name = "cantidad_stock")
+    @Column(name = "cantidad_stock")
     private Integer cantidadStock;
 
     private Boolean estado;
+
+}
+
 
