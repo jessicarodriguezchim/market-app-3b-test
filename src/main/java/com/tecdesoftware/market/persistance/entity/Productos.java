@@ -29,6 +29,12 @@ public class Productos {
 
     private Boolean estado;
 
+    //Relación con la entidad Cliente : Muchas compras a un cliente
+    @ManyToOne
+    //No quiero que se modifique la entidad cliente, solo relacionarla
+    @JoinColumn(name ="id_categoria", insertable=false, updatable=false)
+    private Categoria Categoria;
+
 
 //Métodos publicos//
 

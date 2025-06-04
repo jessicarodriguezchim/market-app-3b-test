@@ -1,9 +1,6 @@
 package com.tecdesoftware.market.persistance.entity;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "compras_productos")
@@ -15,6 +12,20 @@ public class compraProducto {
     private Integer cantidad;
     private Double total;
     private Boolean estado;
+
+    //Relación con la entidad Cliente : Muchas compras a un cliente
+    @ManyToOne
+    //No quiero que se modifique la entidad cliente, solo relacionarla
+    @JoinColumn(name ="id_compra", insertable=false, updatable=false)
+    private Compras Compras;
+
+    //Relación con la entidad Cliente : Muchas compras a un cliente
+    @ManyToOne
+    //No quiero que se modifique la entidad cliente, solo relacionarla
+    @JoinColumn(name ="id_products", insertable=false, updatable=false)
+    private Compras compras;
+
+
 
     public CompraProductoPK getId() {
         return id;
