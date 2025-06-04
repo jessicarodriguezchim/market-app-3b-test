@@ -1,9 +1,7 @@
 package com.tecdesoftware.market.persistance.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="clientes")
@@ -21,6 +19,11 @@ public class Cliente {
 
     @Column(name = "correo_electronico")
     private String email;
+
+    //Aqui se conecta con la entidad compra
+    @OneToMany (mappedBy = "cliente")
+    private List<Compras> compras;
+
 
     public String getEmail() {
         return email;

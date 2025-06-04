@@ -1,6 +1,7 @@
 package com.tecdesoftware.market.persistance.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "compras")
@@ -23,6 +24,16 @@ public class Compras {
 
     @Column(name = "precio_venta")
     private Double precioVenta;
+
+    //Relación con la entidad Cliente : Muchas compras a un cliente
+    @ManyToOne
+    //No quiero que se modifique la entidad cliente, solo relacionarla
+    @JoinColumn(name ="id_cliente", insertable=false, updatable=false)
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "compras")
+    private List<compraProducto> comprasProductos;
+
 
     @Column(name = "cantidad_stock")
     private Integer cantidadStock;

@@ -1,5 +1,4 @@
 package com.tecdesoftware.market.persistance.entity;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -28,6 +27,12 @@ public class Productos {
     private Integer cantidadStock;
 
     private Boolean estado;
+
+    //Relación con la entidad Cliente : Muchas compras a un cliente
+    @ManyToOne
+    //No quiero que se modifique la entidad cliente, solo relacionarla
+    @JoinColumn(name ="id_categoria", insertable=false, updatable=false)
+    private Categoria categoria;
 
 
 //Métodos publicos//
@@ -76,6 +81,10 @@ public class Productos {
         return cantidadStock;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
     public void setCantidadStock(Integer cantidadStock) {
         this.cantidadStock = cantidadStock;
     }
@@ -87,4 +96,9 @@ public class Productos {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
 }
