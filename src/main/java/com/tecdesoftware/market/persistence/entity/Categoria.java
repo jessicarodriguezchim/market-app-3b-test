@@ -1,4 +1,4 @@
-package com.tecdesoftware.market.persistance.entity;
+package com.tecdesoftware.market.persistence.entity;
 
 import jakarta.persistence.*;
 
@@ -12,30 +12,26 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column (name = "id_categoria")
     private int idCategoria;
-
-    private String decripcion;
+    private String descripcion;
     private Boolean estado;
 
-    //Aqui se conecta con la entidad categoria
-    @OneToMany (mappedBy = "categoria")
-    private List<Productos> productos;
-
-
+    @OneToMany (mappedBy= "categoria")
+    private List<Producto> productos;
 
     public int getIdCategoria() {
         return idCategoria;
     }
 
+
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
 
     }
-    public String getDecripcion() {
-        return decripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
-
-    public void setDecripcion(String decripcion) {
-        this.decripcion = decripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Boolean getEstado() {
@@ -46,12 +42,11 @@ public class Categoria {
         this.estado = estado;
     }
 
-    public List<Productos> getProductos() {
+    public List<Producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<Productos> productos) {
+    public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
 }
-

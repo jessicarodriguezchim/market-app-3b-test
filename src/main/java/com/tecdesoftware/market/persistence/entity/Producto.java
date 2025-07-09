@@ -1,41 +1,30 @@
-package com.tecdesoftware.market.persistance.entity;
+//package persistence.entity;
+package com.tecdesoftware.market.persistence.entity;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "Productos")
-public class Productos {
-
-
+@Table(name="productos")
+public class Producto {
     @Id //llave primaria
-    //Hace el id autoincremental
+    //valor unico autoincrementable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_products")
+    @Column (name="id_producto")
     private Integer idProducto;
-
     private String nombre;
-
-    @Column(name ="id_categoria")
+    @Column (name="id_categoria")
     private Integer idCategoria;
-
-    @Column(name = "codigo_barras")
+    @Column (name="codigo_barras")
     private String codigoBarras;
-
-    @Column(name = "precio_venta")
+    @Column (name="precio_venta")
     private Double precioVenta;
-
-    @Column (name = "cantidad_stock")
+    @Column (name="cantidad_stock")
     private Integer cantidadStock;
-
     private Boolean estado;
 
-    //Relación con la entidad Cliente : Muchas compras a un cliente
     @ManyToOne
-    //No quiero que se modifique la entidad cliente, solo relacionarla
-    @JoinColumn(name ="id_categoria", insertable=false, updatable=false)
+    @JoinColumn(name="id_categoria", insertable=false, updatable = false) //insertar sin modificar
     private Categoria categoria;
-
-
-//Métodos publicos//
 
     public Integer getIdProducto() {
         return idProducto;
@@ -81,10 +70,6 @@ public class Productos {
         return cantidadStock;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
     public void setCantidadStock(Integer cantidadStock) {
         this.cantidadStock = cantidadStock;
     }
@@ -97,8 +82,11 @@ public class Productos {
         this.estado = estado;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-
 }
