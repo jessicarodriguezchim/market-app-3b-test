@@ -20,24 +20,19 @@ public class ProductController {
     private ProductoRepository productoRepository;
     @GetMapping("")
     public ResponseEntity<List<Product>> getAll() {
-        return new ResponseEntity<>(productService.getAll(),HttpStatus.OK); //200
     }
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProduct(@PathVariable("id") int productId) {
         return productService.getProduct(productId)
                 .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND)); //404
     }
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Product>> getByCategory(@PathVariable("categoryId") int categoryId) {
         return productService.getByCategory(categoryId)
                 .map(products -> new ResponseEntity<>(products, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));//404
-
     }
     @PostMapping("")
     public ResponseEntity<Product> save(@RequestBody Product product) {
-        return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);//201
     }
 
 
@@ -57,9 +52,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") int productId) {
         if (productService.delete(productId)) {
-            return new ResponseEntity(HttpStatus.OK);//200
         } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);//404
         }
     }
 }
