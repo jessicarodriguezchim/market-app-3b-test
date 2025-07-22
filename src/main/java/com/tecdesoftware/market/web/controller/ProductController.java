@@ -36,6 +36,7 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAll() {
         return new ResponseEntity<>(productService.getAll(),HttpStatus.OK) ;
     }
+
     @GetMapping("/{id}")
     @Operation(
             summary = "Get products by ID",
@@ -53,6 +54,7 @@ public class ProductController {
                 .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @GetMapping("/category/{categoryId}")
     @Operation(
             summary = "Get product by category",
@@ -71,6 +73,7 @@ public class ProductController {
                 .map(products -> new ResponseEntity<>(products, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @PostMapping("/save")
     @Operation(summary = "Save a new product", description = "Register a new product and return the created product",
     requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -103,6 +106,32 @@ public class ProductController {
 
 
     @PutMapping("/{id}")
+    @Operation(
+            summary = "Update product by ID",
+            description = "Update an existing product using its ID",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    required = true,
+                    description = "Product object with updated fields",
+                    content = @Content(
+                            examples = @ExampleObject(
+                                    name = "Updated Product Example",
+                                    value = """
+                                        {
+                                            "name": "Updated Butter Beer",
+                                            "categoryId": 2,
+                                            "price": "22.00",
+                                            "stock": 180,
+                                            "active": true
+                                        }
+                                        """
+                            )
+                    )
+            )
+    )
+    @ApiResponse(responseCode = "200", description = "Product updated successfully")
+    @ApiResponse(responseCode = "400", description = "Invalid product data")
+    @ApiResponse(responseCode = "404", description = "Product not found")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<Product> update(@PathVariable("id") int productId, @RequestBody Product product) {
         return productService.getProduct(productId)
                 .map(existingProduct -> {
