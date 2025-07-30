@@ -95,12 +95,12 @@ public class ProductController {
             )
         )
     )
-    @ApiResponse( responseCode = "201", description = "Product created successfully")
-    @ApiResponse ( responseCode = "400", description = "Invalid product data")
-    @ApiResponse ( responseCode = "401", description = "Unauthorized")
-    @ApiResponse( responseCode = "403", description = "Forbidden")
-    @ApiResponse ( responseCode = "409", description = "Product conflict(duplicate ID)")
-    @ApiResponse ( responseCode = "500", description = "Internal server error")
+    @ApiResponse( responseCode = "201", description = "Product created successfully")//creacion exitosa - metodo post
+    @ApiResponse ( responseCode = "400", description = "Invalid product data")// mala peticion
+    @ApiResponse ( responseCode = "401", description = "Unauthorized")//no autorizado
+    @ApiResponse( responseCode = "403", description = "Forbidden") //prohibido
+    @ApiResponse ( responseCode = "409", description = "Product conflict(duplicate ID)")//conflicto
+    @ApiResponse ( responseCode = "500", description = "Internal server error") //error de servidor general
     public ResponseEntity<Product> save(@RequestBody Product product) {
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
